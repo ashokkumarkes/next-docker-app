@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    env_file:
+    - .env
+    depends_on:
+    - postgres
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: hiring_mydb
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
+    # command: npm run dev   # ✅ yaha likhna hai
+    # environment:
+      # - CHOKIDAR_USEPOLLING=true
+      # - WATCHPACK_POLLING=true
