@@ -19,5 +19,6 @@ export const env = {
   nodeEnv: process.env.NODE_ENV ?? 'development',
   port: Number.parseInt(process.env.PORT ?? '3000', 10),
   databaseUrl: process.env.DATABASE_URL as string,
+  jwtSecret: process.env.JWT_SECRET ?? 'default_jwt_secret',
   isProduction: process.env.NODE_ENV === 'production',
 } as const;

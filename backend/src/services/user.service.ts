@@ -4,6 +4,8 @@ import { AppError } from '../errors/AppError';
 export interface CreateUserInput {
   name: string;
   email: string;
+  role?: string;
+  status?: string;
 }
 
 export async function listUsers() {
@@ -12,9 +14,15 @@ export async function listUsers() {
   });
 }
 
+export async function findUserByEmail(email: string) {
+  return prisma.user.findUnique({ where: { email } });
+}
+
 export async function createUser(input: CreateUserInput) {
   const email = input.email.trim().toLowerCase();
   const name = input.name.trim();
+  const role = input.role?.trim() || 'User';
+  const status = input.status?.trim() || 'Active';
 
   if (!name || !email) {
     throw new AppError(400, 'Name and email are required');
@@ -26,6 +34,6 @@ export async function createUser(input: CreateUserInput) {
   }
 
   return prisma.user.create({
-    data: { name, email },
+    data: { name, email, role, status },
   });
 }
