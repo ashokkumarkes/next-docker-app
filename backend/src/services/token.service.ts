@@ -1,6 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { env } from '../config/env';
 
+// import bcrypt from 'bcryptjs';
+// import jwt, { SignOptions } from 'jsonwebtoken';
+// import { createHmac, createHash, randomBytes } from 'crypto';
+// import { User } from '@prisma/client';
+// import { prisma } from '../db';
+
 export type TokenPayload = {
   userId: string;
   email: string;
